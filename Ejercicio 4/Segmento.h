@@ -4,6 +4,7 @@
 
 #ifndef PRACTICO_1_SEGMENTO_H
 #define PRACTICO_1_SEGMENTO_H
+
 #include "Punto.h"
 
 

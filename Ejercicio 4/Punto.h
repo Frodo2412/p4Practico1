@@ -11,13 +11,9 @@ private:
     float x, y;
 public:
     Punto(float = 0.0, float = 0.0);
-
     float getX();
-
     float getY();
-
     void setX(float);
-
     void setY(float);
 };
 
