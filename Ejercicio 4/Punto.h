@@ -11,8 +11,8 @@ private:
     float x, y;
 public:
     Punto(float = 0.0, float = 0.0);
-    float getX();
-    float getY();
+    float getX() const;
+    float getY() const;
     void setX(float);
     void setY(float);
 };
