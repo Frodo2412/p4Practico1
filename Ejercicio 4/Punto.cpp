@@ -9,18 +9,18 @@ Punto::Punto(float x, float y) {
     this->y = y;
 }
 
-float Punto::getX() {
+float Punto::getX() const {
     return this->x;
 }
 
-float Punto::getY() {
+float Punto::getY() const {
     return this->y;
 }
 
 void Punto::setX(float x) {
-    this->x = x
+    this->x = x;
 }
 
-void Punto::setX(float y) {
-    this->y = y
+void Punto::setY(float y) {
+    this->y = y;
 }
