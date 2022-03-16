@@ -3,75 +3,83 @@
 //
 
 #include "String.h"
-#include <bits/stdc++.h>
 #include <iostream>
 
+// Constructors and Destructor
 String::String() {
-    this->str = nullptr;
+    str = new char[1];
+    str[0] = '\0';
+    length = 0;
 }
 
-String::String(char *string) {
-    this->str = string;
+String::String(const char *string) {
+    int i = 0;
+    while (string[i] != '\0')
+        i++;
+    length = i;
+    str = new char[length + 1];
+    for (int j = 0; j < length; j++)
+        str[j] = string[j];
 }
 
-String::String(String &string) {
+String::String(const String &string) {
+    length = string.length;
+    str = new char[length + 1];
+    for (int i = 0; i < length; i++)
+        str[i] = string.str[i];
+}
+
+String::~String() {
+    delete[] str;
+}
+
+// Getters
+char *String::getString() {
+    return str;
+}
+
+// Overloaded Operators
+String &String::operator=(const String &string) {
+    if (this != &string) {
+        delete[] str;
+        length = string.length;
+        str = new char[length + 1];
+        for (int i = 0; i < length; i++)
+            str[i] = string.str[i];
+    }
     this->str = string.str;
 }
 
-String &String::operator=(String string) {
-    this->str = string.str;
-}
-
-String &String::operator=(char *string) {
-    this->str = string;
-}
-
-String String::operator+(String string) {
+String String::operator+(String &string) {
     String result;
-    result.str = strcat(this->str, string.str);
-    return result;
-}
-
-String String::operator+(char *string) {
-    String result;
-    result.str = strcat(this->str, string);
+    result.length = length + string.length;
+    result.str = new char[result.length + 1];
+    for (int i = 0; i < length; i++)
+        result.str[i] = str[i];
+    for (int i = length; i < result.length; i++)
+        result.str[i] = string.str[i - length];
+    result.str[result.length] = '\0';
     return result;
 }
 
 char &String::operator[](int index) {
-    int i = 0;
-    while (this->str[i] != '\0' && i < index) {
-        i++;
-    }
-    if (i == index) {
-        return this->str[i];
-    } else {
+    if (index < 0 || index >= length)
         throw std::out_of_range("Index out of range");
-    }
+    return str[index];
 }
 
-std::ostream &operator<<(std::ostream &os, const String &string) {
-    os << string.str;
+std::ostream &operator<<(std::ostream &os, String &string) {
+    os << string.getString();
     return os;
 }
 
-std::istream &String::operator>>(std::istream &is) {
-    char *aux = new char[100];
-    is >> aux;
-    this->str = aux;
+std::istream &operator>>(std::istream &is, String &string) {
+    char aux[MAX_STRING_LENGTH];
+    is.getline(aux, MAX_STRING_LENGTH);
+    string = String(aux);
     return is;
 }
 
-String::~String() {
-    delete[] this->str;
-    delete this;
+int String::largo() {
+    return length;
 }
-
-int String::length() {
-    int i = 0;
-    while (this->str[i] != '\0') {
-        i++;
-    }
-    return i;
-}
-

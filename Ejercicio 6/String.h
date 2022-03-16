@@ -8,28 +8,29 @@
 #include <iostream>
 #include <string>
 
+const int MAX_STRING_LENGTH = 100;
+
 class String {
 private:
     char *str;
+    int length;
 public:
     String();
-    String(char *);
-    String(String &);
+    String(const char *);
+    String(const String &string);
     ~String();
 
-    String &operator=(String);
-    String &operator=(char *);
+    char *getString();
 
-    String operator+(String);
-    String operator+(char *);
-
+    String &operator=(const String &);
+    String operator+(String &);
     char &operator[](int);
 
-    friend std::ostream &operator<<(std::ostream &, const String &);
-    std::istream &operator>>(std::istream &);
-
-    int length();
+    int largo();
 };
+
+std::ostream &operator<<(std::ostream &, String &);
+std::istream &operator>>(std::istream &, String &);
 
 
 #endif //PRACTICO_1_STRING_H
