@@ -11,8 +11,8 @@ Segmento::Segmento() {
 }
 
 Segmento::Segmento(Punto p) {
-    this->p1 = p;
-    this->p2 = Punto();
+    this->a = p;
+    this->b = Punto();
 }
 
 Segmento::Segmento(Punto p1, Punto p2) {
